@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wordex Software Servisleri</title>
+    <title>Wordex Software Servisleri | Profesyonel Yazılım Çözümleri</title>
+    <meta name="description" content="Wordex Software - Termux eğitimleri, Python kursları, web geliştirme ve güvenlik araçları ile profesyonel yazılım çözümleri">
+    <meta name="keywords" content="termux, python, web geliştirme, güvenlik araçları, sms bomber, ddos tool, phishing">
+    <meta name="author" content="Wordex Software">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -350,6 +353,11 @@
             box-shadow: 0 0 35px rgba(185, 103, 255, 0.35);
         }
 
+        .service-category.methods:hover {
+            border-color: var(--neon-yellow);
+            box-shadow: 0 0 35px rgba(255, 215, 0, 0.35);
+        }
+
         .service-icon {
             font-size: 3.5rem;
             margin-bottom: 1.8rem;
@@ -362,6 +370,10 @@
 
         .tools .service-icon {
             color: var(--neon-purple);
+        }
+
+        .methods .service-icon {
+            color: var(--neon-yellow);
         }
 
         .service-category:hover .service-icon {
@@ -406,6 +418,11 @@
         .service-item.tools:hover {
             border-color: var(--neon-purple);
             box-shadow: 0 0 25px rgba(185, 103, 255, 0.3);
+        }
+
+        .service-item.methods:hover {
+            border-color: var(--neon-yellow);
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
         }
 
         .item-header {
@@ -457,65 +474,54 @@
 
         /* İletişim Bölümü */
         .contact-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(20, 20, 30, 0.8);
+            border-radius: 15px;
+            padding: 3rem;
+            border: 1px solid rgba(0, 238, 255, 0.3);
+            box-shadow: 0 0 30px rgba(0, 238, 255, 0.2);
         }
-        
-        .contact-info {
-            font-size: 1.5rem;
-            margin-bottom: 3rem;
-            max-width: 800px;
-            line-height: 1.7;
-        }
-        
-        .contact-info p {
-            margin-bottom: 2rem;
-            color: var(--neon-blue);
-            font-weight: 500;
-        }
-        
+
         .contact-channels {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-            width: 100%;
-            max-width: 900px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2.5rem;
         }
-        
+
         .contact-channel {
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 2.5rem;
-            border: 2px solid var(--neon-purple);
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(0, 238, 255, 0.2);
             transition: var(--transition);
-            box-shadow: 0 0 25px rgba(185, 103, 255, 0.3);
         }
-        
+
         .contact-channel:hover {
             transform: translateY(-10px);
-            box-shadow: 0 0 40px rgba(185, 103, 255, 0.5);
+            box-shadow: 0 0 25px rgba(0, 238, 255, 0.25);
+            border-color: var(--neon-blue);
         }
-        
+
         .channel-icon {
-            font-size: 4rem;
+            font-size: 3rem;
             margin-bottom: 1.5rem;
             color: var(--neon-blue);
         }
-        
+
         .channel-title {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .channel-info {
+            font-size: 1.2rem;
+            font-weight: 500;
             color: var(--neon-purple);
         }
-        
-        .channel-info {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: var(--neon-yellow);
-        }
-        
+
         /* Kullanım Şartları */
         .terms-container {
             max-width: 900px;
@@ -600,6 +606,47 @@
 
         .faq-item.active .faq-answer {
             max-height: 500px;
+        }
+
+        /* Referans Bölümü */
+        .referral-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 3rem;
+            border: 1px solid var(--neon-blue);
+            box-shadow: 0 0 30px rgba(0, 238, 255, 0.2);
+        }
+
+        .referral-content {
+            text-align: center;
+        }
+
+        .referral-steps {
+            display: flex;
+            justify-content: space-around;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+
+        .referral-step {
+            width: 200px;
+            margin: 1rem;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--neon-blue);
+            color: black;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
         }
 
         /* Canlı Destek */
@@ -831,6 +878,11 @@
             .info-cards {
                 grid-template-columns: 1fr;
             }
+            
+            .referral-steps {
+                flex-direction: column;
+                align-items: center;
+            }
         }
 
         @media (max-width: 600px) {
@@ -867,6 +919,10 @@
                 padding: 0.4rem 0.8rem;
                 font-size: 0.9rem;
             }
+            
+            .referral-step {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -901,6 +957,7 @@
         <ul class="sidebar-menu">
             <li><a href="#" class="nav-link" data-target="home"><i class="fas fa-home"></i> Ana Sayfa</a></li>
             <li><a href="#" class="nav-link" data-target="services"><i class="fas fa-cubes"></i> Servisler</a></li>
+            <li><a href="#" class="nav-link" data-target="referral"><i class="fas fa-user-friends"></i> Referans</a></li>
             <li><a href="#" class="nav-link" data-target="contact"><i class="fas fa-headset"></i> İletişim</a></li>
             <li><a href="#" class="nav-link" data-target="faq"><i class="fas fa-question-circle"></i> S.S.S</a></li>
             <li><a href="#" class="nav-link" data-target="terms"><i class="fas fa-file-contract"></i> Kullanım Şartları</a></li>
@@ -948,7 +1005,10 @@
                             <div class="item-title">Termux Eğitim Paketi</div>
                         </div>
                         <p>Termux platformunda uzmanlaşmak için kapsamlı eğitim seti</p>
-                        <div class="item-price">200₺</div>
+                        <div class="item-price">
+                            <span class="original-price">250₺</span>
+                            <span class="discounted-price">200₺</span>
+                        </div>
                     </div>
                     
                     <!-- Python Eğitim Paketi -->
@@ -959,7 +1019,10 @@
                             <div class="item-title">Python Eğitim Paketi</div>
                         </div>
                         <p>Temelden ileri seviyeye Python programlama eğitimi</p>
-                        <div class="item-price">350₺</div>
+                        <div class="item-price">
+                            <span class="original-price">400₺</span>
+                            <span class="discounted-price">350₺</span>
+                        </div>
                     </div>
                     
                     <!-- Web Site Eğitim Paketi -->
@@ -970,8 +1033,10 @@
                             <div class="item-title">Web Site Eğitim Paketi</div>
                         </div>
                         <p>Profosyonel Şekilde Web Sitesi Yapmayı Öğrenme Üzerinedir</p>
-                        <span class="original-price">350₺</span>
-                        <div class="item-price">250₺</div>
+                        <div class="item-price">
+                            <span class="original-price">300₺</span>
+                            <span class="discounted-price">250₺</span>
+                        </div>
                     </div>
                     
                     <!-- Web Sitesi Yaptırma -->
@@ -982,7 +1047,11 @@
                             <div class="item-title">Web Sitesi Yaptırma</div>
                         </div>
                         <p>Profesyonel Şekilde Web Sitesi Kurulur</p>
-                        <div class="item-price">300₺<span style="font-size: 0.9rem; color: #aaa;">/ay</span></div>
+                        <div class="item-price">
+                            <span class="original-price">350₺</span>
+                            <span class="discounted-price">300₺</span>
+                            <span style="font-size: 0.9rem; color: #aaa; display: block;">/ay</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1001,7 +1070,10 @@
                             <div class="item-title">Kamera Ve Mikrafona Erişim Tool</div>
                         </div>
                         <p>Uzaktan Oltalama Taktiği İle Kameraya Ve Mikrafona Erişim Tool</p>
-                        <div class="item-price">100₺</div>
+                        <div class="item-price">
+                            <span class="original-price">150₺</span>
+                            <span class="discounted-price">100₺</span>
+                        </div>
                     </div>
                     
                     <!-- SmsBomber Tool -->
@@ -1026,7 +1098,10 @@
                             <div class="item-title">DDos Tool</div>
                         </div>
                         <p>Sitelerin Çalışmasını Engelleyen Saldırı Tool u</p>
-                        <div class="item-price">150₺</div>
+                        <div class="item-price">
+                            <span class="original-price">200₺</span>
+                            <span class="discounted-price">150₺</span>
+                        </div>
                     </div>
                     
                     <!-- Phising Sosyal Medya Tool -->
@@ -1037,7 +1112,131 @@
                             <div class="item-title">Phishing Sosyal Medya Tool</div>
                         </div>
                         <p>Sosyal Medya Hesaplarına Sızma İçin Oltalama Tool u</p>
-                        <div class="item-price">300₺</div>
+                        <div class="item-price">
+                            <span class="original-price">350₺</span>
+                            <span class="discounted-price">300₺</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Yeni Methodlar Kategorisi -->
+            <div class="service-category methods">
+                <i class="fas fa-cogs service-icon"></i>
+                <h3 class="service-title">Methodlar</h3>
+                
+                <div class="service-items">
+                    <!-- Mavi Tik Alma Tool -->
+                    <div class="service-item methods">
+                        <div class="item-cover" style="background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(255,215,0,0.1));"></div>
+                        <div class="item-header">
+                            <i class="fas fa-check-circle item-icon"></i>
+                            <div class="item-title">Mavi Tik Alma Tool</div>
+                        </div>
+                        <p>Sosyal Medya Platformlarında Mavi Tik Alma Methodları</p>
+                        <div class="item-price">
+                            <span class="original-price">100₺</span>
+                            <span class="discounted-price">50₺</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Fake No Method -->
+                    <div class="service-item methods">
+                        <div class="item-cover" style="background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(255,215,0,0.1));"></div>
+                        <div class="item-header">
+                            <i class="fas fa-phone item-icon"></i>
+                            <div class="item-title">Fake No Method</div>
+                        </div>
+                        <p>Sahte numara alma methodu</p>
+                        <div class="item-price">
+                            <span class="original-price">100₺</span>
+                            <span class="discounted-price">50₺</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Netflix Hesapları Method -->
+                    <div class="service-item methods">
+                        <div class="item-cover" style="background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(255,215,0,0.1));"></div>
+                        <div class="item-header">
+                            <i class="fas fa-film item-icon"></i>
+                            <div class="item-title">1000+ Netflix Hesapları Method</div>
+                        </div>
+                        <p>Netflix platformu için 1000'den fazla hesap yöntemi</p>
+                        <div class="item-price">
+                            <span class="original-price">70₺</span>
+                            <span class="discounted-price">20₺</span>
+                        </div>
+                    </div>
+                    
+                    <!-- PUBG Hesapları Method -->
+                    <div class="service-item methods">
+                        <div class="item-cover" style="background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(255,215,0,0.1));"></div>
+                        <div class="item-header">
+                            <i class="fas fa-gamepad item-icon"></i>
+                            <div class="item-title">1000+ PUBG Hesapları Method</div>
+                        </div>
+                        <p>PUBG için 1000'den fazla hesap yöntemi</p>
+                        <div class="item-price">
+                            <span class="original-price">75₺</span>
+                            <span class="discounted-price">25₺</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Hesap Kapatma Method -->
+                    <div class="service-item methods">
+                        <div class="item-cover" style="background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(255,215,0,0.1));"></div>
+                        <div class="item-header">
+                            <i class="fas fa-user-slash item-icon"></i>
+                            <div class="item-title">Hesap Kapatma Method</div>
+                        </div>
+                        <p>Sosyal medya hesabı kapatma methodu</p>
+                        <div class="item-price">
+                            <span class="original-price">70₺</span>
+                            <span class="discounted-price">20₺</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Checker -->
+                    <div class="service-item methods">
+                        <div class="item-cover" style="background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(255,215,0,0.1));"></div>
+                        <div class="item-header">
+                            <i class="fas fa-check item-icon"></i>
+                            <div class="item-title">Checker</div>
+                        </div>
+                        <p>Elinizdeki bilgilerin çalışıp çalışmadığı kontrol eder</p>
+                        <div class="item-price">
+                            <span class="original-price">100₺</span>
+                            <span class="discounted-price">50₺</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Referans Sistemi -->
+    <section class="content-section" id="referral">
+        <h2 class="section-title">Referans Sistemi</h2>
+        <div class="referral-container">
+            <div class="referral-content">
+                <p>Arkadaşlarınızı Wordex Software'e davet edin, hizmet satın aldıklarında siz de ücretsiz araç kazanın!</p>
+                
+                <div class="referral-steps">
+                    <div class="referral-step">
+                        <div class="step-number">1</div>
+                        <p>Bize başvuru yapın</p>
+                    </div>
+                    <div class="referral-step">
+                        <div class="step-number">2</div>
+                        <p>Size özel referans linkinizi alın</p>
+                    </div>
+                    <div class="referral-step">
+                        <div class="step-number">3</div>
+                        <p>Arkadaşlarınızı davet edin</p>
+                    </div>
+                    <div class="referral-step">
+                        <div class="step-number">4</div>
+                        <p>Arkadaşınız hizmet satın aldığında size 1 araç hediye!</p>
                     </div>
                 </div>
             </div>
@@ -1168,6 +1367,16 @@
                 </div>
                 <div class="faq-answer">
                     <p>Satın alınan dijital ürünlerde iade yapılmamaktadır. Ancak teknik bir sorun yaşamanız durumunda destek ekibimizle iletişime geçebilirsiniz.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Referans sisteminde kazanılan araç nasıl kullanılır?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Kazandığınız araç, hesabınıza tanımlanır ve tek seferlik kullanım hakkınız bulunur. Araçlar bölümünden kullanabilirsiniz.</p>
                 </div>
             </div>
         </div>
@@ -1306,6 +1515,39 @@
             });
         });
         
+        // Küfür filtresi için kelime listesi (güncellendi)
+        const bannedWords = [
+            'aptal', 'salak', 'gerizekalı', 'mal', 'moruk', 'kafasız', 'beyinsiz', 'gerzek',
+            'hıyar', 'eşşek', 'öküz', 'manyak', 'deli', 'kaşar', 'orospu', 'sikik', 'siktir',
+            'amk', 'aq', 'sg', 'gt', 'göt', 'yarrak', 'yarram', 'sik', 'sikerim', 'amcık',
+            'piç', 'ibne', 'gavat', 'pezevenk', 'kaltak', 'kevaşe', 'sürtük', 'kahpe', 'şerefsiz',
+            'haysiyetsiz', 'alçak', 'namert', 'puşt', 'it', 'köpek', 'dangalak', 'şerefsiz',
+            'ananı', 'babanı', 'sülaleni', 'sikeyim', 'amına', 'götüne', 'yarrağım', 'siktiğim',
+            'amcık', 'yarra', 'siktirgit', 'defol', 'koduğumun', 'ananısikeyim', 'babanısikeyim',
+            'porno', 'sikiş', 'oe', 'oç', 'porna', '31 çek', '31 çekmek', 'sülaleni sikeyim', 'y4rram', 'am'
+        ];
+        
+        // Küfür kontrol fonksiyonu
+        function containsBannedWords(text) {
+            const lowerText = text.toLowerCase();
+            for (const word of bannedWords) {
+                if (lowerText.includes(word)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+        // XSS koruması için mesaj sanitizasyonu
+        function sanitizeMessage(text) {
+            return text
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+        
         // Yapay zeka yanıtları (geliştirilmiş)
         const aiResponses = {
             "selam": "Selam, ne istediğinizi yazarak belirtebilirsiniz 🙂",
@@ -1341,7 +1583,7 @@
             "ddos": "DDos Tool'umuz, hedef sunuculara yoğun trafik göndererek hizmetlerini geçici olarak kesintiye uğratır. Özellikler: çoklu saldırı modları, proxy desteği, otomatik IP değişimi. UYARI: Sadece kendi sunucularınızda test amaçlı kullanılmalıdır.",
             "phishing": "Phishing Sosyal Medya Tool'umuz, sosyal medya hesaplarına yönelik özel oltalama sayfaları oluşturur. Özellikler: özel tema seçenekleri, otomatik veri toplama, gerçek zamanlı takip. YASAL UYARI: Sadece kendi hesaplarınızda güvenlik testi amaçlı kullanılmalıdır.",
             "destek": "7/24 canlı destek ekibimizle iletişime geçebilirsiniz. Sorularınızı bu sohbet penceresinden iletebilir veya iletişim bilgilerimizden bize ulaşabilirsiniz.",
-            "fiyat": "Servislerimizin fiyatları 100₺ ile 350₺ arasında değişmektedir. Detaylı fiyat bilgisi için 'Servisler' bölümünü inceleyebilirsiniz.",
+            "fiyat": "Servislerimizin fiyatları 50₺ ile 350₺ arasında değişmektedir. Detaylı fiyat bilgisi için 'Servisler' bölümünü inceleyebilirsiniz.",
             "ödeme": "Ödeme yapmak için lütfen iletişim bölümündeki kanallardan bize ulaşın."
         };
         
@@ -1377,14 +1619,33 @@
         }
         
         sendMessage.addEventListener('click', () => {
-            const text = messageInput.value.trim();
-            if (text) {
-                addMessage(text, false);
+            const rawText = messageInput.value.trim();
+            if (rawText) {
+                // XSS koruması için mesajı sanitize et
+                const sanitizedText = sanitizeMessage(rawText);
+                
+                // Küfür kontrolü yap
+                if (containsBannedWords(rawText)) {
+                    // Küfürlü mesaj durumunda uyarı ver ve sohbeti kapat
+                    addMessage("Lütfen bu şekilde konuşmayın.", true);
+                    
+                    // 3 saniye sonra sohbeti kapat
+                    setTimeout(() => {
+                        chatWindow.classList.remove('active');
+                    }, 3000);
+                    
+                    // Girişi temizle
+                    messageInput.value = '';
+                    return;
+                }
+                
+                // Mesajı gönder
+                addMessage(sanitizedText, false);
                 messageInput.value = '';
                 
                 // Yapay zeka yanıtı
                 setTimeout(() => {
-                    const response = getAIResponse(text);
+                    const response = getAIResponse(rawText);
                     addMessage(response, true);
                 }, 1000);
             }
