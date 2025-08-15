@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordex Software Servisleri</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Temel Stiller */
+        :root {
+            --dark-bg: #0a0a0a;
+            --darker-bg: #050505;
+            --card-bg: #151515;
+            --text-light: #f0f0f0;
+            --neon-blue: #00eeff;
+            --neon-purple: #b967ff;
+            --neon-yellow: #FFD700;
+            --neon-red: #FF5555;
+            --transition: all 0.3s ease;
+            --success: #4ecca3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--darker-bg), var(--dark-bg));
+            color: var(--text-light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-weight: 700;
+        }
+
+        /* Partikül Animasyonları */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--neon-blue);
+            opacity: 0.15;
+            animation: float 15s infinite linear;
+        }
+
+        .particle:nth-child(2n) {
+            background: var(--neon-purple);
+            opacity: 0.1;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(10vw, 15vh); }
+            50% { transform: translate(20vw, 5vh); }
+            75% { transform: translate(5vw, 20vh); }
+            100% { transform: translate(0, 0); }
+        }
+
+        /* Glow Çizgileri */
+        .glow-line {
+            position: fixed;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+            box-shadow: 0 0 10px var(--neon-blue);
+            animation: glowLineMove 8s infinite linear;
+            z-index: -1;
+        }
+
+        @keyframes glowLineMove {
+            0% { width: 0; opacity: 0; left: -10%; }
+            10% { opacity: 0.7; }
+            50% { width: 50%; opacity: 1; }
+            90% { opacity: 0.7; }
+            100% { width: 0; opacity: 0; left: 110%; }
+        }
+
+        /* Navbar Stilleri */
+        .navbar {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(0, 238, 255, 0.2);
+            box-shadow: 0 0 15px rgba(0, 238, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 15px rgba(185, 103, 255, 0.3);
+            letter-spacing: -0.5px;
+        }
+
+        .mobile-menu {
+            display: block;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 101;
+        }
+
+        /* Bakiye Göstergesi */
+        .balance-display {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(78, 204, 163, 0.2);
+            border: 1px solid rgba(78, 204, 163, 0.4);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            font-weight: 600;
+            color: #4ecca3;
+        }
+
+        .balance-display i {
+            font-size: 1.2rem;
+        }
+
+        /* Sidebar Menü */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -320px;
+            width: 300px;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 2rem;
+            transition: var(--transition);
+            border-right: 1px solid rgba(0, 238, 255, 0.3);
+            box-shadow: 0 0 40px rgba(0, 238, 255, 0.3);
+            overflow-y: auto;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            margin-top: 3rem;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 1.8rem;
+        }
+
+        .sidebar-menu a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1.3rem;
+            display: block;
+            padding: 0.7rem 0;
+            position: relative;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .sidebar-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-blue);
+            transition: var(--transition);
+        }
+
+        .sidebar-menu a:hover {
+            color: var(--neon-blue);
+        }
+
+        .sidebar-menu a:hover::after {
+            width: 100%;
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+
+        .close-sidebar {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 1.8rem;
+            color: #aaa;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-sidebar:hover {
+            color: var(--neon-blue);
+            transform: rotate(90deg);
+        }
+
+        /* Ana Sayfa Stilleri */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(185, 103, 255, 0.2);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+            color: #ccc;
+            font-weight: 300;
+        }
+
+        .info-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin-top: 3rem;
+        }
+
+        .info-card {
+            background: rgba(20, 20, 20, 0.7);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+            text-align: left;
+            backdrop-filter: blur(5px);
+        }
+
+        .info-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px rgba(0, 238, 255, 0.2);
+            border-color: var(--neon-blue);
+        }
+
+        .info-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--neon-blue);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .info-card p {
+            color: #aaa;
+            line-height: 1.7;
+        }
+
+        /* Diğer Bölümler */
+        .content-section {
+            display: none;
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            font-size: 2.8rem;
+            position: relative;
+            letter-spacing: -0.5px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            box-shadow: 0 0 15px var(--neon-blue);
+            border-radius: 2px;
+        }
+
+        /* Servisler Bölümü */
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .service-category {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2.5rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .service-category:hover {
+            transform: translateY(-15px);
+        }
+
+        .service-category.education:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 35px rgba(0, 238, 255, 0.35);
+        }
+
+        .service-category.tools:hover {
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 35px rgba(185, 103, 255, 0.35);
+        }
+
+        .service-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.8rem;
+            transition: var(--transition);
+        }
+
+        .education .service-icon {
+            color: var(--neon-blue);
+        }
+
+        .tools .service-icon {
+            color: var(--neon-purple);
+        }
+
+        .service-category:hover .service-icon {
+            transform: scale(1.2);
+            text-shadow: 0 0 20px currentColor;
+        }
+
+        .service-title {
+            font-size: 2rem;
+            margin-bottom: 1.2rem;
+            letter-spacing: -0.5px;
+        }
+
+        .service-items {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .service-item {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .service-item.education:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 25px rgba(0, 238, 255, 0.3);
+        }
+
+        .service-item.tools:hover {
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 25px rgba(185, 103, 255, 0.3);
+        }
+
+        .item-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .item-icon {
+            font-size: 1.8rem;
+        }
+
+        .item-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .item-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--neon-yellow);
+            margin-top: 1rem;
+            text-align: right;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: var(--neon-red);
+            margin-right: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .discounted-price {
+            color: var(--neon-yellow);
+            font-size: 1.4rem;
+        }
+
+        .item-cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), transparent);
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        /* İletişim Bölümü */
+        .contact-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .contact-info {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            line-height: 1.7;
+        }
+        
+        .contact-info p {
+            margin-bottom: 2rem;
+            color: var(--neon-blue);
+            font-weight: 500;
+        }
+        
+        .contact-channels {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            width: 100%;
+            max-width: 900px;
+        }
+        
+        .contact-channel {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2.5rem;
+            border: 2px solid var(--neon-purple);
+            transition: var(--transition);
+            box-shadow: 0 0 25px rgba(185, 103, 255, 0.3);
+        }
+        
+        .contact-channel:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 40px rgba(185, 103, 255, 0.5);
+        }
+        
+        .channel-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            color: var(--neon-blue);
+        }
+        
+        .channel-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--neon-purple);
+        }
+        
+        .channel-info {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--neon-yellow);
+        }
+        
+        /* Kullanım Şartları */
+        .terms-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(20, 20, 30, 0.8);
+            border-radius: 15px;
+            padding: 3rem;
+            border: 1px solid rgba(0, 238, 255, 0.3);
+            box-shadow: 0 0 30px rgba(0, 238, 255, 0.2);
+        }
+        
+        .terms-content {
+            max-height: 60vh;
+            overflow-y: auto;
+            padding-right: 1rem;
+        }
+        
+        .terms-content h3 {
+            color: var(--neon-blue);
+            margin: 2rem 0 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .terms-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            color: #ccc;
+        }
+        
+        .terms-content ul {
+            padding-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .terms-content li {
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+        }
+
+        /* SSS Bölümü */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .faq-question:hover {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-answer p {
+            padding: 1.5rem 0;
+            line-height: 1.7;
+            color: #ccc;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        /* Canlı Destek */
+        .live-support {
+            position: fixed;
+            bottom: 2.5rem;
+            right: 2.5rem;
+            z-index: 99;
+        }
+
+        .support-icon {
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.7rem;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(185, 103, 255, 0.6);
+            transition: var(--transition);
+            animation: pulse 2.5s infinite;
+        }
+
+        .support-icon:hover {
+            transform: scale(1.15);
+            box-shadow: 0 0 30px var(--neon-purple);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(185, 103, 255, 0.7); }
+            70% { box-shadow: 0 0 0 20px rgba(185, 103, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(185, 103, 255, 0); }
+        }
+
+        .chat-window {
+            position: fixed;
+            bottom: 100px;
+            right: 35px;
+            width: 380px;
+            height: 500px;
+            background: var(--card-bg);
+            border-radius: 18px;
+            border: 1px solid rgba(0, 238, 255, 0.35);
+            box-shadow: 0 0 30px rgba(0, 238, 255, 0.25);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(25px);
+            transition: all 0.4s ease;
+            z-index: 100;
+        }
+
+        .chat-window.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .chat-header {
+            background: rgba(10, 10, 10, 0.9);
+            padding: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 238, 255, 0.25);
+        }
+
+        .chat-title {
+            font-size: 1.3rem;
+            color: var(--neon-blue);
+            font-weight: 600;
+        }
+
+        .close-chat {
+            background: none;
+            border: none;
+            color: #aaa;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-chat:hover {
+            color: var(--neon-blue);
+            transform: rotate(90deg);
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 1.2rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .message {
+            max-width: 85%;
+            padding: 1rem;
+            border-radius: 12px;
+            animation: messageAppear 0.3s ease;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        @keyframes messageAppear {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .received {
+            background: rgba(0, 238, 255, 0.12);
+            align-self: flex-start;
+            border-bottom-left-radius: 0;
+        }
+
+        .sent {
+            background: rgba(185, 103, 255, 0.12);
+            align-self: flex-end;
+            border-bottom-right-radius: 0;
+        }
+
+        .chat-input {
+            display: flex;
+            padding: 1.2rem;
+            background: rgba(10, 10, 10, 0.9);
+            border-top: 1px solid rgba(0, 238, 255, 0.25);
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 0.9rem 1.2rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            color: var(--text-light);
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+        }
+
+        .chat-input input:focus {
+            outline: none;
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 12px rgba(0, 238, 255, 0.35);
+        }
+
+        .chat-input button {
+            margin-left: 0.8rem;
+            background: var(--neon-blue);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.9rem 1.4rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1.1rem;
+        }
+
+        .chat-input button:hover {
+            background: var(--neon-purple);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(10, 10, 10, 0.95);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(0, 238, 255, 0.2);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-light);
+            font-size: 1.3rem;
+            transition: var(--transition);
+        }
+
+        .social-icon:hover {
+            background: var(--neon-blue);
+            color: black;
+            transform: translateY(-7px);
+            box-shadow: 0 0 20px var(--neon-blue);
+        }
+
+        .copyright {
+            color: #aaa;
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Responsive Tasarım */
+        @media (max-width: 900px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .section-title {
+                font-size: 2.3rem;
+            }
+            
+            .chat-window {
+                width: 92%;
+                right: 4%;
+                height: 65vh;
+            }
+            
+            .contact-channels {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .content-section {
+                padding: 4rem 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 3rem;
+            }
+            
+            .service-category {
+                padding: 1.5rem;
+            }
+            
+            .sidebar {
+                width: 85%;
+            }
+            
+            .channel-info {
+                font-size: 1.2rem;
+            }
+            
+            .balance-display {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Partikül Animasyonu -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- Glow Çizgileri -->
+    <div class="glow-line" style="top: 20%;"></div>
+    <div class="glow-line" style="top: 50%; animation-delay: -4s;"></div>
+    <div class="glow-line" style="top: 80%; animation-delay: -6s;"></div>
+    
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="mobile-menu" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="logo">Wordex</div>
+        <div class="balance-display">
+            <i class="fas fa-coins"></i>
+            <span id="balanceAmount">0₺</span>
+        </div>
+    </nav>
+    
+    <!-- Sidebar Menü -->
+    <div class="sidebar" id="sidebar">
+        <div class="close-sidebar" id="closeSidebar">
+            <i class="fas fa-times"></i>
+        </div>
+        <div class="logo">Wordex</div>
+        
+        <ul class="sidebar-menu">
+            <li><a href="#" class="nav-link" data-target="home"><i class="fas fa-home"></i> Ana Sayfa</a></li>
+            <li><a href="#" class="nav-link" data-target="services"><i class="fas fa-cubes"></i> Servisler</a></li>
+            <li><a href="#" class="nav-link" data-target="contact"><i class="fas fa-headset"></i> İletişim</a></li>
+            <li><a href="#" class="nav-link" data-target="faq"><i class="fas fa-question-circle"></i> S.S.S</a></li>
+            <li><a href="#" class="nav-link" data-target="terms"><i class="fas fa-file-contract"></i> Kullanım Şartları</a></li>
+        </ul>
+    </div>
+    
+    <!-- Ana Sayfa -->
+    <section class="hero" id="home">
+        <h1>Wordex Software Servisleri</h1>
+        <p>Profesyonel yazılım çözümleri ve gelişmiş araçlarla işinizi bir üst seviyeye taşıyın. Hizmetlerimiz ve özellikler hakkında bilgi almak için sol üstteki menüyü kullanın.</p>
+        
+        <div class="info-cards">
+            <div class="info-card">
+                <h3><i class="fas fa-rocket"></i> Yenilikçi Çözümler</h3>
+                <p>En son teknolojilerle geliştirilmiş araçlarımız ve eğitim paketlerimizle sektörde öncü olun.</p>
+            </div>
+            
+            <div class="info-card">
+                <h3><i class="fas fa-shield-alt"></i> Güvenli Platform</h3>
+                <p>Gelişmiş güvenlik önlemleriyle verileriniz her zaman koruma altında.</p>
+            </div>
+            
+            <div class="info-card">
+                <h3><i class="fas fa-headset"></i> 7/24 Destek</h3>
+                <p>Profesyonel destek ekibimiz her türlü soru ve sorununuz için yanınızda.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Servisler -->
+    <section class="content-section" id="services">
+        <h2 class="section-title">Servislerimiz</h2>
+        <div class="services-container">
+            <!-- Eğitim Paketleri -->
+            <div class="service-category education">
+                <i class="fas fa-graduation-cap service-icon"></i>
+                <h3 class="service-title">Eğitim Paketleri</h3>
+                
+                <div class="service-items">
+                    <!-- Termux Eğitim Paketi -->
+                    <div class="service-item education">
+                        <div class="item-cover" style="background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,238,255,0.1));"></div>
+                        <div class="item-header">
+                            <i class="fas fa-terminal item-icon"></i>
+                            <div class="item-title">Termux Eğitim Paketi</div>
+                        </div>
+                        <p>Termux platformunda uzmanlaşmak için kapsamlı eğitim seti</p>
+                        <div class="item-price">200₺</div>
+                    </div>
+                    
+                    <!-- Python Eğitim Paketi -->
+                    <div class="service-item education">
+                        <div class="item-cover" style="background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,238,255,0.1));"></div>
+                        <div class="item-header">
+                            <i class="fab fa-python item-icon"></i>
+                            <div class="item-title">Python Eğitim Paketi</div>
+                        </div>
+                        <p>Temelden ileri seviyeye Python programlama eğitimi</p>
+                        <div class="item-price">350₺</div>
+                    </div>
+                    
+                    <!-- Web Site Eğitim Paketi -->
+                    <div class="service-item education">
+                        <div class="item-cover" style="background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,238,255,0.1));"></div>
+                        <div class="item-header">
+                            <i class="fas fa-code item-icon"></i>
+                            <div class="item-title">Web Site Eğitim Paketi</div>
+                        </div>
+                        <p>Profosyonel Şekilde Web Sitesi Yapmayı Öğrenme Üzerinedir</p>
+                        <span class="original-price">350₺</span>
+                        <div class="item-price">250₺</div>
+                    </div>
+                    
+                    <!-- Web Sitesi Yaptırma -->
+                    <div class="service-item education">
+                        <div class="item-cover" style="background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,238,255,0.1));"></div>
+                        <div class="item-header">
+                            <i class="fas fa-laptop-code item-icon"></i>
+                            <div class="item-title">Web Sitesi Yaptırma</div>
+                        </div>
+                        <p>Profesyonel Şekilde Web Sitesi Kurulur</p>
+                        <div class="item-price">300₺<span style="font-size: 0.9rem; color: #aaa;">/ay</span></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Toollar -->
+            <div class="service-category tools">
+                <i class="fas fa-code service-icon"></i>
+                <h3 class="service-title">Toollar</h3>
+                
+                <div class="service-items">
+                    <!-- Kamera Erişim Tool -->
+                    <div class="service-item tools">
+                        <div class="item-cover" style="background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(185,103,255,0.1));"></div>
+                        <div class="item-header">
+                            <i class="fas fa-camera item-icon"></i>
+                            <div class="item-title">Kamera Ve Mikrafona Erişim Tool</div>
+                        </div>
+                        <p>Uzaktan Oltalama Taktiği İle Kameraya Ve Mikrafona Erişim Tool</p>
+                        <div class="item-price">100₺</div>
+                    </div>
+                    
+                    <!-- SmsBomber Tool -->
+                    <div class="service-item tools">
+                        <div class="item-cover" style="background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(185,103,255,0.1));"></div>
+                        <div class="item-header">
+                            <i class="fas fa-sms item-icon"></i>
+                            <div class="item-title">SmsBomber V2.0</div>
+                        </div>
+                        <p>Gelişmiş Özellikleriyle Ard Arda Sms Saldırısı</p>
+                        <div class="item-price">
+                            <span class="original-price">250₺</span>
+                            <span class="discounted-price">200₺</span>
+                        </div>
+                    </div>
+                    
+                    <!-- DDos Tool -->
+                    <div class="service-item tools">
+                        <div class="item-cover" style="background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(185,103,255,0.1));"></div>
+                        <div class="item-header">
+                            <i class="fas fa-network-wired item-icon"></i>
+                            <div class="item-title">DDos Tool</div>
+                        </div>
+                        <p>Sitelerin Çalışmasını Engelleyen Saldırı Tool u</p>
+                        <div class="item-price">150₺</div>
+                    </div>
+                    
+                    <!-- Phising Sosyal Medya Tool -->
+                    <div class="service-item tools">
+                        <div class="item-cover" style="background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(185,103,255,0.1));"></div>
+                        <div class="item-header">
+                            <i class="fas fa-fish item-icon"></i>
+                            <div class="item-title">Phishing Sosyal Medya Tool</div>
+                        </div>
+                        <p>Sosyal Medya Hesaplarına Sızma İçin Oltalama Tool u</p>
+                        <div class="item-price">300₺</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- İletişim -->
+    <section class="content-section" id="contact">
+        <h2 class="section-title">İletişim</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <p>Bakiye eklemek ve diğer konular için aşağıdaki iletişim kanallarından bize ulaşın</p>
+            </div>
+            
+            <div class="contact-channels">
+                <div class="contact-channel">
+                    <i class="fab fa-telegram channel-icon"></i>
+                    <h3 class="channel-title">Telegram</h3>
+                    <div class="channel-info">@wordexchecker</div>
+                </div>
+                
+                <div class="contact-channel">
+                    <i class="fab fa-discord channel-icon"></i>
+                    <h3 class="channel-title">Discord</h3>
+                    <div class="channel-info">@slaxy.py</div>
+                </div>
+                
+                <div class="contact-channel">
+                    <i class="fab fa-tiktok channel-icon"></i>
+                    <h3 class="channel-title">TikTok</h3>
+                    <div class="channel-info">@wordexchecker</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Kullanım Şartları -->
+    <section class="content-section" id="terms">
+        <h2 class="section-title">Kullanım Şartları</h2>
+        <div class="terms-container">
+            <div class="terms-content">
+                <h3>1. Hizmetlerin Kullanımı</h3>
+                <p>Wordex Software tarafından sunulan tüm hizmetler, yalnızca yasal ve etik amaçlar için kullanılmalıdır. Hizmetlerin kötüye kullanımı kesinlikle yasaktır.</p>
+                
+                <h3>2. Yasaklı Faaliyetler</h3>
+                <p>Aşağıdaki faaliyetler kesinlikle yasaktır:</p>
+                <ul>
+                    <li>Herhangi bir kişi veya kuruluşa zarar verme amacıyla hizmetleri kullanmak</li>
+                    <li>Yasadışı faaliyetlerde bulunmak veya bu faaliyetleri desteklemek</li>
+                    <li>Başkalarının gizlilik haklarını ihlal etmek</li>
+                    <li>Herhangi bir şekilde dolandırıcılık yapmak</li>
+                    <li>Başkalarının sistemlerine izinsiz erişim sağlamak</li>
+                    <li>Spam veya istenmeyen ileti göndermek</li>
+                </ul>
+                
+                <h3>3. Sorumluluk Reddi</h3>
+                <p>Wordex Software, hizmetlerin kötüye kullanılmasından doğacak hiçbir yasal sorumluluğu kabul etmemektedir. Kullanıcılar, hizmetleri kendi sorumluluklarında kullanırlar.</p>
+                
+                <h3>4. Hizmetlerin Sınırlamaları</h3>
+                <p>Tüm hizmetler eğitim ve araştırma amaçlıdır. Gerçek sistemlere veya kişilere karşı kullanılmamalıdır.</p>
+                
+                <h3>5. Hesap Güvenliği</h3>
+                <p>Kullanıcılar hesaplarının güvenliğinden kendileri sorumludur. Şifrelerin gizli tutulması ve paylaşılmaması gerekmektedir.</p>
+                
+                <h3>6. Fikri Mülkiyet</h3>
+                <p>Sitede yer alan tüm içerikler (yazılım, eğitim materyalleri, görseller vb.) Wordex Software'e aittir ve telif haklarıyla korunmaktadır.</p>
+                
+                <h3>7. İptal ve İade Politikası</h3>
+                <p>Satın alınan dijital ürünlerde iade yapılmamaktadır. Ancak teknik bir sorun yaşamanız durumunda destek ekibimizle iletişime geçebilirsiniz.</p>
+                
+                <h3>8. Değişiklikler</h3>
+                <p>Wordex Software, kullanım şartlarını önceden haber vermeksizin değiştirme hakkını saklı tutar.</p>
+                
+                <h3>9. Yasal Uyarı</h3>
+                <p>Bu sitede sunulan hizmetlerin yasadışı kullanımı durumunda tüm yasal sorumluluk kullanıcıya aittir. Wordex Software bu tür kullanımlardan sorumlu tutulamaz.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- SSS Bölümü -->
+    <section class="content-section" id="faq">
+        <h2 class="section-title">Sıkça Sorulan Sorular</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Servisleriniz nasıl kullanılır?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Servislerimizi kullanmak için öncelikle ilgili servisi satın almanız gerekmektedir. Satın alma işleminden sonra size özel erişim bilgileri ve kullanım kılavuzu sağlanacaktır.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Destek ekibine nasıl ulaşabilirim?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Canlı destek butonuna tıklayarak veya iletişim sayfasındaki kanallardan bize ulaşabilirsiniz. Destek ekibimiz 7/24 hizmetinizdedir.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Servisleriniz güncel mi?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Tüm servislerimiz düzenli olarak güncellenmekte ve geliştirilmektedir. Özellikle güvenlik araçları, güncel tehditlere karşı sürekli güncellenir.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>Kurumsal destek sağlıyor musunuz?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Evet, kurumlar için özel eğitim programları ve güvenlik çözümleri sunmaktayız. Detaylı bilgi için iletişim kanallarımızdan bize ulaşabilirsiniz.</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    <span>İade politikası nedir?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>Satın alınan dijital ürünlerde iade yapılmamaktadır. Ancak teknik bir sorun yaşamanız durumunda destek ekibimizle iletişime geçebilirsiniz.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Canlı Destek -->
+    <div class="live-support" id="support">
+        <div class="support-icon" id="supportIcon">
+            <i class="fas fa-comments"></i>
+        </div>
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header">
+                <div class="chat-title">Wordex AI V1.0</div>
+                <button class="close-chat" id="closeChat">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="message received">
+                    Merhaba! Ben Wordex AI V1.0, size nasıl yardımcı olabilirim?
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="messageInput" placeholder="Mesajınızı yazın...">
+                <button id="sendMessage"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="social-icons">
+            <a href="https://t.me/wordexchecker" class="social-icon" target="_blank"><i class="fab fa-telegram"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-discord"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+        </div>
+        <div class="copyright">
+            &copy; 2023 Wordex Software Servisleri. Tüm hakları saklıdır.<br>
+            Profesyonel yazılım çözümleri için güvenilir adres.
+        </div>
+    </footer>
+    
+    <script>
+        // Partikül animasyonu oluşturma
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 40;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Rastgele boyut (3-8px arası)
+                const size = Math.random() * 5 + 3;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Rastgele pozisyon
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Rastgele animasyon süresi (5-20s arası)
+                particle.style.animationDuration = `${Math.random() * 15 + 5}s`;
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Sidebar menü kontrolü
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const closeSidebar = document.getElementById('closeSidebar');
+        
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.add('active');
+        });
+        
+        closeSidebar.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+        });
+        
+        // Sayfalar arası geçiş
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = this.getAttribute('data-target');
+                
+                // Tüm sayfaları gizle
+                document.querySelectorAll('.content-section').forEach(section => {
+                    section.style.display = 'none';
+                });
+                
+                // Ana sayfayı gizle
+                document.getElementById('home').style.display = 'none';
+                
+                // Hedef sayfayı göster
+                if (target === 'home') {
+                    document.getElementById('home').style.display = 'flex';
+                } else if (target === 'support') {
+                    document.getElementById('chatWindow').classList.add('active');
+                } else {
+                    document.getElementById(target).style.display = 'block';
+                }
+                
+                // Sidebar'ı kapat
+                sidebar.classList.remove('active');
+            });
+        });
+        
+        // Canlı destek sohbet penceresi
+        const supportIcon = document.getElementById('supportIcon');
+        const chatWindow = document.getElementById('chatWindow');
+        const closeChat = document.getElementById('closeChat');
+        const messageInput = document.getElementById('messageInput');
+        const sendMessage = document.getElementById('sendMessage');
+        const chatMessages = document.getElementById('chatMessages');
+        
+        supportIcon.addEventListener('click', () => {
+            chatWindow.classList.toggle('active');
+        });
+        
+        closeChat.addEventListener('click', () => {
+            chatWindow.classList.remove('active');
+        });
+        
+        // SSS açılır kapanır
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+        
+        // Yapay zeka yanıtları (geliştirilmiş)
+        const aiResponses = {
+            "selam": "Selam, ne istediğinizi yazarak belirtebilirsiniz 🙂",
+            "merhaba": "Merhaba! Size nasıl yardımcı olabilirim?",
+            "nasılsın": "İyiyim, teşekkür ederim! Siz nasılsınız? 🙂",
+            "iyiyim": "Harika haber! Size nasıl yardımcı olabilirim?",
+            "teşekkür": "Rica ederim! Başka bir konuda yardımcı olabilir miyim?",
+            "sağ ol": "Ne demek, her zaman! 🙂",
+            "günaydın": "Günaydın! Güzel bir gün geçirmenizi dilerim.",
+            "iyi geceler": "İyi geceler! Umarım güzel bir uyku çekersiniz.",
+            "hoşçakal": "Görüşmek üzere! İyi günler dilerim.",
+            "yardım": "Tabii ki, size nasıl yardımcı olabilirim?",
+            "adın ne": "Ben Wordex AI V1.0, yapay zeka destek asistanınız.",
+            "ne yapıyorsun": "Size Wordex Software hizmetleri hakkında bilgi veriyor ve sorularınızı yanıtlıyorum.",
+            "kimsin": "Ben Wordex Software'in yapay zeka destek asistanıyım. Adım Wordex AI V1.0.",
+            "görüşürüz": "Görüşmek üzere! Her zaman yardımcı olmaya hazırım.",
+            "güle güle": "Güle güle! İyi günler dilerim.",
+            "naber": "İyilik, sizden naber?",
+            "iyi": "Harika! Size nasıl yardımcı olabilirim?",
+            "tamam": "Anlaşıldı! Başka bir isteğiniz var mı?",
+            "hayır": "Pekala, başka bir konuda yardımcı olabilirim.",
+            "evet": "Harika! Size nasıl yardımcı olmamı istersiniz?",
+            "öptüm": "Hoşçakalın! İyi günler dilerim.",
+            "wordex": "Wordex Software 2018'de hizmete başlamış ve hala sürdürmekte olan bir yazılım anonim şirketidir.",
+            "güven": "Güvende kusur olmaz! Size en iyi şekilde hizmet vereceğiz efendim.",
+            "bakiye": "Bakiye eklemek için lütfen iletişim bölümündeki kanallardan bize ulaşın. Telegram: @wordexchecker, Discord: @slaxy.py",
+            "termux": "Termux Eğitim Paketimiz, Android cihazlarda Linux ortamını kullanmayı öğretir. Paketimizde; temel komutlar, araç kurulumları, script yazma ve güvenlik testleri gibi konular yer alır. Süre: 12 saat video, 5 uygulama projesi.",
+            "python": "Python Eğitim Paketimiz sıfırdan ileri seviyeye Python programlama öğretir. Konular: temel syntax, OOP, veri analizi, web scraping, otomasyon ve güvenlik scriptleri. Süre: 20 saat video, 10 gerçek dünya projesi.",
+            "web eğitim": "Web Site Eğitim Paketimiz HTML, CSS, JavaScript ve temel backend kavramlarını kapsar. Öğrenecekleriniz: responsive tasarım, form işleme, API entegrasyonu ve güvenlik önlemleri. Süre: 15 saat video, 5 tam teşekküllü proje.",
+            "web yaptırma": "Web Sitesi Yaptırma hizmetimizde profesyonel ekiplerimiz sizin için özel tasarım ve geliştirme yapar. Hizmetler: kurumsal kimlik, SEO optimizasyonu, güvenlik sertifikaları ve 7/24 teknik destek.",
+            "kamera": "Kamera ve Mikrofon Erişim Tool'umuz, hedef cihazın kamera ve mikrofonuna erişim sağlar. Özellikler: uzaktan kontrol, kayıt yapma, görüntü yakalama ve otomatik raporlama. Sadece yasal amaçlar için kullanılmalıdır.",
+            "smsbomber": "SmsBomber V2.0, geliştirilmiş özellikleriyle hedef numaraya yoğun SMS gönderimi yapar. Yenilikler: çoklu API desteği, özel mesaj şablonları, zamanlayıcı ve anonim gönderim. NOT: Sadece kendi sisteminizde test amaçlı kullanılmalıdır.",
+            "ddos": "DDos Tool'umuz, hedef sunuculara yoğun trafik göndererek hizmetlerini geçici olarak kesintiye uğratır. Özellikler: çoklu saldırı modları, proxy desteği, otomatik IP değişimi. UYARI: Sadece kendi sunucularınızda test amaçlı kullanılmalıdır.",
+            "phishing": "Phishing Sosyal Medya Tool'umuz, sosyal medya hesaplarına yönelik özel oltalama sayfaları oluşturur. Özellikler: özel tema seçenekleri, otomatik veri toplama, gerçek zamanlı takip. YASAL UYARI: Sadece kendi hesaplarınızda güvenlik testi amaçlı kullanılmalıdır.",
+            "destek": "7/24 canlı destek ekibimizle iletişime geçebilirsiniz. Sorularınızı bu sohbet penceresinden iletebilir veya iletişim bilgilerimizden bize ulaşabilirsiniz.",
+            "fiyat": "Servislerimizin fiyatları 100₺ ile 350₺ arasında değişmektedir. Detaylı fiyat bilgisi için 'Servisler' bölümünü inceleyebilirsiniz.",
+            "ödeme": "Ödeme yapmak için lütfen iletişim bölümündeki kanallardan bize ulaşın."
+        };
+        
+        function getAIResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            // Anahtar kelimeleri kontrol et
+            for (const [key, response] of Object.entries(aiResponses)) {
+                if (lowerMessage.includes(key)) {
+                    return response;
+                }
+            }
+            
+            // Varsayılan yanıtlar
+            const defaultResponses = [
+                "Anladım, ekibimize iletiyorum. En kısa sürede dönüş yapılacaktır.",
+                "Teşekkür ederiz, talebiniz ekibimize iletildi.",
+                "Bu konuda size nasıl yardımcı olabilirim?",
+                "Daha fazla bilgi için lütfen sorunuzu detaylandırın.",
+                "Üzgünüm, bu konuda yeterli bilgim yok. Lütfen daha anlaşılır bir soru sorun."
+            ];
+            
+            return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+        }
+        
+        function addMessage(text, isReceived = true) {
+            const message = document.createElement('div');
+            message.classList.add('message');
+            message.classList.add(isReceived ? 'received' : 'sent');
+            message.textContent = text;
+            chatMessages.appendChild(message);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        sendMessage.addEventListener('click', () => {
+            const text = messageInput.value.trim();
+            if (text) {
+                addMessage(text, false);
+                messageInput.value = '';
+                
+                // Yapay zeka yanıtı
+                setTimeout(() => {
+                    const response = getAIResponse(text);
+                    addMessage(response, true);
+                }, 1000);
+            }
+        });
+        
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage.click();
+            }
+        });
+        
+        // Sayfa yüklendiğinde partikülleri oluştur
+        window.addEventListener('load', () => {
+            createParticles();
+        });
+    </script>
+</body>
+</html>
