@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wordex Software Servisleri | Profesyonel Yazılım Çözümleri</title>
+    <title>Wordex Software Servisleri | Güncellendi</title>
     <meta name="description" content="Wordex Software - Termux eğitimleri, Python kursları, web geliştirme ve güvenlik araçları ile profesyonel yazılım çözümleri">
     <meta name="keywords" content="termux, python, web geliştirme, güvenlik araçları, sms bomber, ddos tool, phishing">
     <meta name="author" content="Wordex Software">
@@ -20,6 +20,7 @@
             --neon-purple: #b967ff;
             --neon-yellow: #FFD700;
             --neon-red: #FF5555;
+            --neon-green: #4ecca3;
             --transition: all 0.3s ease;
             --success: #4ecca3;
         }
@@ -252,6 +253,17 @@
             font-weight: 300;
         }
 
+        .update-badge {
+            background: var(--neon-green);
+            color: black;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            box-shadow: 0 0 15px rgba(78, 204, 163, 0.5);
+        }
+
         .info-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -358,6 +370,11 @@
             box-shadow: 0 0 35px rgba(255, 215, 0, 0.35);
         }
 
+        .service-category.accounts:hover {
+            border-color: var(--neon-green);
+            box-shadow: 0 0 35px rgba(78, 204, 163, 0.35);
+        }
+
         .service-icon {
             font-size: 3.5rem;
             margin-bottom: 1.8rem;
@@ -374,6 +391,10 @@
 
         .methods .service-icon {
             color: var(--neon-yellow);
+        }
+
+        .accounts .service-icon {
+            color: var(--neon-green);
         }
 
         .service-category:hover .service-icon {
@@ -423,6 +444,11 @@
         .service-item.methods:hover {
             border-color: var(--neon-yellow);
             box-shadow: 0 0 25px rgba(255, 215, 0, 0.3);
+        }
+
+        .service-item.accounts:hover {
+            border-color: var(--neon-green);
+            box-shadow: 0 0 25px rgba(78, 204, 163, 0.3);
         }
 
         .item-header {
@@ -940,7 +966,7 @@
         <div class="mobile-menu" id="menuToggle">
             <i class="fas fa-bars"></i>
         </div>
-        <div class="logo">Wordex</div>
+        <div class="logo">Wordex Software</div>
         <div class="balance-display">
             <i class="fas fa-coins"></i>
             <span id="balanceAmount">0₺</span>
@@ -952,7 +978,7 @@
         <div class="close-sidebar" id="closeSidebar">
             <i class="fas fa-times"></i>
         </div>
-        <div class="logo">Wordex</div>
+        <div class="logo">Wordex Software</div>
         
         <ul class="sidebar-menu">
             <li><a href="#" class="nav-link" data-target="home"><i class="fas fa-home"></i> Ana Sayfa</a></li>
@@ -966,18 +992,19 @@
     
     <!-- Ana Sayfa -->
     <section class="hero" id="home">
+        <div class="update-badge">⚡ 1 Alana 1 Bedava! Tüm Eğitim ve Hizmetlerde Sınırlı Süre Kampanya ⚡</div>
         <h1>Wordex Software Servisleri</h1>
         <p>Profesyonel yazılım çözümleri ve gelişmiş araçlarla işinizi bir üst seviyeye taşıyın. Hizmetlerimiz ve özellikler hakkında bilgi almak için sol üstteki menüyü kullanın.</p>
         
         <div class="info-cards">
             <div class="info-card">
-                <h3><i class="fas fa-rocket"></i> Yenilikçi Çözümler</h3>
-                <p>En son teknolojilerle geliştirilmiş araçlarımız ve eğitim paketlerimizle sektörde öncü olun.</p>
+                <h3><i class="fas fa-shield-alt"></i> Güvence</h3>
+                <p>Dijital Ürünlerimizde Aylık Yaklaşık 500+ Satın Alım Gerçekleşiyor!</p>
             </div>
             
             <div class="info-card">
-                <h3><i class="fas fa-shield-alt"></i> Güvenli Platform</h3>
-                <p>Gelişmiş güvenlik önlemleriyle verileriniz her zaman koruma altında.</p>
+                <h3><i class="fas fa-rocket"></i>Yenilikçi Çözümler</h3>
+                <p>En son teknolojilerle geliştirilmiş araçlarımız ve eğitim paketlerimizle sektörde öncü olun.</p>
             </div>
             
             <div class="info-card">
@@ -1020,8 +1047,22 @@
                         </div>
                         <p>Temelden ileri seviyeye Python programlama eğitimi</p>
                         <div class="item-price">
-                            <span class="original-price">400₺</span>
-                            <span class="discounted-price">350₺</span>
+                            <span class="original-price">350₺</span>
+                            <span class="discounted-price">200₺</span>
+                        </div>
+                    </div>
+
+                    <!-- Sanal Eğitim Paketi -->
+                    <div class="service-item education">
+                        <div class="item-cover" style="background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,238,255,0.1));"></div>
+                        <div class="item-header">
+                            <i class="fas fa-laptop"></i>
+                            <div class="item-title">Sanal Eğitim Paketi</div>
+                        </div>
+                        <p>Sanala Dair Şeyleri Öğreten Eğitim Paketi</p>
+                        <div class="item-price">
+                            <span class="original-price">150₺</span>
+                            <span class="discounted-price">100₺</span>
                         </div>
                     </div>
                     
@@ -1039,18 +1080,17 @@
                         </div>
                     </div>
                     
-                    <!-- Web Sitesi Yaptırma -->
+                    <!-- CC Eğitim Paketi -->
                     <div class="service-item education">
                         <div class="item-cover" style="background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,238,255,0.1));"></div>
                         <div class="item-header">
-                            <i class="fas fa-laptop-code item-icon"></i>
-                            <div class="item-title">Web Sitesi Yaptırma</div>
+                            <i class="fas fa-credit-card item-icon"></i>
+                            <div class="item-title">CC Eğitim Paketi</div>
                         </div>
-                        <p>Profesyonel Şekilde Web Sitesi Kurulur</p>
+                        <p>CC Nedir Nasıl Yapılır Terimleri Öğretme Amaçlanır</p>
                         <div class="item-price">
                             <span class="original-price">350₺</span>
-                            <span class="discounted-price">300₺</span>
-                            <span style="font-size: 0.9rem; color: #aaa; display: block;">/ay</span>
+                            <span class="discounted-price">250₺</span>
                         </div>
                     </div>
                 </div>
@@ -1085,6 +1125,33 @@
                         </div>
                         <p>Gelişmiş Özellikleriyle Ard Arda Sms Saldırısı</p>
                         <div class="item-price">
+                            <span class="original-price">200₺</span>
+                            <span class="discounted-price">150₺</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Kişiye Özel SmsBomber -->
+                    <div class="service-item tools">
+                        <div class="item-cover" style="background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(185,103,255,0.1));"></div>
+                        <div class="item-header">
+                            <i class="fas fa-sms item-icon"></i>
+                            <div class="item-title">Kişiye Özel SmsBomber</div>
+                        </div>
+                        <p>Özelleştirilmiş mesajlar ile hedefe özel SMS saldırısı</p>
+                        <div class="item-price">
+                            <span class="discounted-price">200₺</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Tiktok İzlenme -->
+                    <div class="service-item tools">
+                        <div class="item-cover" style="background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(185,103,255,0.1));"></div>
+                        <div class="item-header">
+                            <i class="fab fa-tiktok item-icon"></i>
+                            <div class="item-title">Tiktok İzlenme</div>
+                        </div>
+                        <p>Tiktok Gönderisine Düşmeyen İzlenme Botu</p>
+                        <div class="item-price">
                             <span class="original-price">250₺</span>
                             <span class="discounted-price">200₺</span>
                         </div>
@@ -1103,24 +1170,88 @@
                             <span class="discounted-price">150₺</span>
                         </div>
                     </div>
-                    
-                    <!-- Phising Sosyal Medya Tool -->
-                    <div class="service-item tools">
-                        <div class="item-cover" style="background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(185,103,255,0.1));"></div>
+                </div>
+            </div>
+            
+            <!-- Hesaplar Kategorisi -->
+            <div class="service-category accounts">
+                <i class="fas fa-user service-icon"></i>
+                <h3 class="service-title">Hesaplar</h3>
+                
+                <div class="service-items">
+                    <!-- PUBG Hesapları -->
+                    <div class="service-item accounts">
+                        <div class="item-cover" style="background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(78,204,163,0.1));"></div>
                         <div class="item-header">
-                            <i class="fas fa-fish item-icon"></i>
-                            <div class="item-title">Phishing Sosyal Medya Tool</div>
+                            <i class="fas fa-gamepad item-icon"></i>
+                            <div class="item-title">1K+ PUBG Hesapları</div>
                         </div>
-                        <p>Sosyal Medya Hesaplarına Sızma İçin Oltalama Tool u</p>
+                        <p>PUBG için 1000'den fazla premium hesap</p>
                         <div class="item-price">
-                            <span class="original-price">350₺</span>
-                            <span class="discounted-price">300₺</span>
+                            <span class="original-price">75₺</span>
+                            <span class="discounted-price">25₺</span>
+                        </div>
+                    </div>
+
+                                        <!-- BluTV Hesapları -->
+                    <div class="service-item accounts">
+                        <div class="item-cover" style="background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(78,204,163,0.1));"></div>
+                        <div class="item-header">
+                            <i class="fas fa-tv"></i>
+                            <div class="item-title">3K+ BluTV Hesapları</div>
+                        </div>
+                        <p>BluTV için 3000'den fazla premium hesap</p>
+                        <div class="item-price">
+                            <span class="original-price">70₺</span>
+                            <span class="discounted-price">20₺</span>
+                        </div>
+                    </div>
+                    
+                                                         <!-- Riot Games Hesapları -->
+                    <div class="service-item accounts">
+                        <div class="item-cover" style="background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(78,204,163,0.1));"></div>
+                        <div class="item-header">
+                            <i class="fas fa-bolt"></i>
+                            <div class="item-title">95K+ Riot Games Hesapları</div>
+                        </div>
+                        <p>Riot Games için 90K+ hesap</p>
+                        <div class="item-price">
+                            <span class="original-price">100₺</span>
+                            <span class="discounted-price">60₺</span>
+                        </div>
+                    </div>
+
+                    <!-- Netflix Hesapları -->
+                    <div class="service-item accounts">
+                        <div class="item-cover" style="background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(78,204,163,0.1));"></div>
+                        <div class="item-header">
+                            <i class="fas fa-film item-icon"></i>
+                            <div class="item-title">5k+ Netflix Hesapları</div>
+                        </div>
+                        <p>Netflix platformu için 5000'den fazla premium hesap</p>
+                        <div class="item-price">
+                            <span class="original-price">70₺</span>
+                            <span class="discounted-price">20₺</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Valorant Hesapları -->
+                    <div class="service-item accounts">
+                        <div class="item-cover" style="background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(78,204,163,0.1));"></div>
+                        <div class="item-header">
+                            <i class="fas fa-crosshairs item-icon"></i>
+                            <div class="item-title">1K+ Valorant Hesapları</div>
+                        </div>
+                        <p>Valorant için 1000'den fazla premium hesap</p>
+                        <div class="item-price">
+                            <span class="original-price">80₺</span>
+                            <span class="discounted-price">20₺</span>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Yeni Methodlar Kategorisi -->
+            <!-- Methodlar Kategorisi -->
             <div class="service-category methods">
                 <i class="fas fa-cogs service-icon"></i>
                 <h3 class="service-title">Methodlar</h3>
@@ -1151,34 +1282,6 @@
                         <div class="item-price">
                             <span class="original-price">100₺</span>
                             <span class="discounted-price">50₺</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Netflix Hesapları Method -->
-                    <div class="service-item methods">
-                        <div class="item-cover" style="background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(255,215,0,0.1));"></div>
-                        <div class="item-header">
-                            <i class="fas fa-film item-icon"></i>
-                            <div class="item-title">1000+ Netflix Hesapları Method</div>
-                        </div>
-                        <p>Netflix platformu için 1000'den fazla hesap yöntemi</p>
-                        <div class="item-price">
-                            <span class="original-price">70₺</span>
-                            <span class="discounted-price">20₺</span>
-                        </div>
-                    </div>
-                    
-                    <!-- PUBG Hesapları Method -->
-                    <div class="service-item methods">
-                        <div class="item-cover" style="background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(255,215,0,0.1));"></div>
-                        <div class="item-header">
-                            <i class="fas fa-gamepad item-icon"></i>
-                            <div class="item-title">1000+ PUBG Hesapları Method</div>
-                        </div>
-                        <p>PUBG için 1000'den fazla hesap yöntemi</p>
-                        <div class="item-price">
-                            <span class="original-price">75₺</span>
-                            <span class="discounted-price">25₺</span>
                         </div>
                     </div>
                     
@@ -1339,6 +1442,24 @@
                     <p>Canlı destek butonuna tıklayarak veya iletişim sayfasındaki kanallardan bize ulaşabilirsiniz. Destek ekibimiz 7/24 hizmetinizdedir.</p>
                 </div>
             </div>
+
+                       <div class="faq-item">
+                <div class="faq-question">
+                    <span>Satın Alım Nasıl Yapılır?</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>1.Satın almak istediğiniz hizmet veya paketi belirleyin.
+
+                     2.Satış işlemleri için Telegram üzerinden bize ulaşın: @wordexchecker
+
+                     3.Ödemenizi gerçekleştirin (IBAN üzerinden para gönderimi yapılmaktadır).
+
+                     4.Ödemeniz onaylandıktan sonra hizmet veya ürününüz size iletilir.
+
+                     💡 Not: Tüm işlemler güvenli ve hızlı bir şekilde tamamlanır. Herhangi bir sorun yaşarsanız Telegram üzerinden destek ekibimize yazabilirsiniz.</p>
+                </div>
+            </div>
             
             <div class="faq-item">
                 <div class="faq-question">
@@ -1356,7 +1477,7 @@
                     <i class="fas fa-chevron-down"></i>
                 </div>
                 <div class="faq-answer">
-                    <p>Evet, kurumlar için özel eğitim programları ve güvenlik çözümleri sunmaktayız. Detaylı bilgi için iletişim kanallarımızdan bize ulaşabilirsiniz.</p>
+                    <p>Evet, kurumlar için özel eğitim programları ve güvenlik çözümleri sunmaktayız. Detaylı bilgi için iletişim bilgilerimizden bize ulaşabilirsiniz.</p>
                 </div>
             </div>
             
@@ -1524,7 +1645,7 @@
             'haysiyetsiz', 'alçak', 'namert', 'puşt', 'it', 'köpek', 'dangalak', 'şerefsiz',
             'ananı', 'babanı', 'sülaleni', 'sikeyim', 'amına', 'götüne', 'yarrağım', 'siktiğim',
             'amcık', 'yarra', 'siktirgit', 'defol', 'koduğumun', 'ananısikeyim', 'babanısikeyim',
-            'porno', 'sikiş', 'oe', 'oç', 'porna', '31 çek', '31 çekmek', 'sülaleni sikeyim', 'y4rram', 'am'
+            'porno', 'sikiş', 'oe', 'oç', 'porna', '31 çek', '31 çekmek', 'sülaleni sikeyim', 'y4rram', 'pırno','sex',
         ];
         
         // Küfür kontrol fonksiyonu
